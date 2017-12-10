@@ -31,8 +31,8 @@ net = caffe.Net(model_def,
 # load imgs and preprocessing
 height = 360
 width = 360
-content = cv2.imread('content.jpg')
-style = cv2.imread('style.jpg')
+content = cv2.imread('images/content.jpg')
+style = cv2.imread('images/style.jpg')
 content = np.cast['float32'](content)
 style = np.cast['float32'](style)
 mean_value = np.array([123.,117.,104.]).reshape(1,1,3)
@@ -69,4 +69,4 @@ for step in range(100):
 # save result
 toNpy = theano.function([], generate_sh.transpose(0, 2, 3, 1).reshape([height, width, 3]))
 result = np.clip(toNpy() + mean_value, 0, 255).astype('uint8')
-cv2.imwrite('result.png', result)
+cv2.imwrite('output/result.png', result)
